@@ -1,3 +1,4 @@
 rootProject.name = 'JavaWeb'
 include 'java'
+include 'java'
 
