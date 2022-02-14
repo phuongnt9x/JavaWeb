@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <h2>
+    <a href="users">List All Users</a>
+  </h2>
   </body>
 </html>
