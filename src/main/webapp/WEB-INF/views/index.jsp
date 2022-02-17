@@ -1,26 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>The World Clock</title>
-
+    <title>Calculator</title>
 </head>
 <body>
-<h2>Sandwich Condiments</h2>
-<form action="/save" method="post">
-    <input type="checkbox" name="condiment" value="lettuce" id="lettuce">
-    <label for="lettuce">Lettuce</label>
-    <br>
-    <input type="checkbox" name="condiment" value="tomato" id="tomato">
-    <label for="tomato">Tomato</label>
-    <br>
-    <input type="checkbox" name="condiment" value="mustard" id="mustard">
-    <label for="mustard">Mustard</label>
-    <br>
-    <input type="checkbox" name="condiment" value="sprouts" id="sprouts">
-    <label for="sprouts">Sprouts</label>
-    <hr>
-    <button type="submit">Save</button>
+<h1>Simple Calculator</h1>
+<form method="post" action="/calculate">
+    <fieldset>
+        <legend>Calculator</legend>
+        <table>
+            <tr>
+                <td>First operand: </td>
+                <td><input name="first-operand" type="text"/></td>
+            </tr>
+            <tr>
+                <td>Operator: </td>
+                <td>
+                    <select name="operator">
+                        <option value="+">Addition</option>
+                        <option value="-">Subtraction</option>
+                        <option value="*">Multiplication</option>
+                        <option value="/">Division</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Second operand: </td>
+                <td><input name="second-operand" type="text"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Calculate"/></td>
+            </tr>
+        </table>
+    </fieldset>
 </form>
 </body>
 </html>

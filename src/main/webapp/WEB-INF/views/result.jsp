@@ -11,7 +11,6 @@
     <title>List of selected condiments.</title>
 </head>
 <body>
-<h1>List of selected condiments</h1>
-<p>${condiment}</p>
+<h1>${first} ${operator} ${second} = ${result}</h1>
 </body>
 </html>
