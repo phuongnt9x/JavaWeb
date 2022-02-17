@@ -46,4 +46,16 @@ public class ProductService implements IProductService {
     public void remove(int id) {
         products.remove(id);
     }
+
+    @Override
+    public Product findByName(String name) {
+        for (Map.Entry<Integer, Product> entry : products.entrySet()) {
+            if(name.equals(entry.getValue().getName())){
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
+
+
 }
