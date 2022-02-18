@@ -4,12 +4,12 @@
 <body>
 <h3>Add Product</h3>
 <p>
-    <a th:href="@{/product}">
-        Back to product list
+    <a th:href="@{/song}">
+        Back to song list
     </a>
 </p>
 <div id="form">
-    <form th:action="@{/product/save}" th:object="${productForm}"
+    <form th:action="@{/song/save}" th:object="${songForm}"
           method="POST" novalidate="novalidate" enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}"/>
         <div>
@@ -17,12 +17,16 @@
             <input type="text" th:field="*{name}"/>
         </div>
         <div>
-            <label>Description</label>
-            <input type="text" th:field="*{description}"/>
+            <label>Artist</label>
+            <input type="text" th:field="*{artist}"/>
+        </div>
+        <div>
+            <label>Category</label>
+            <input type="text" th:field="*{category}"/>
         </div>
         <div>
             <label>Image</label>
-            <input type="file" th:field="*{image}"/>
+            <input type="file" th:field="*{fileName}"/>
         </div>
         <input type="submit" value="Save"/>
     </form>
