@@ -65,7 +65,7 @@ public class AppConfiguration implements WebMvcConfigurer,  ApplicationContextAw
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/image/**")
-                .addResourceLocations("file:" + fileUpload);
+                .addResourceLocations("file:"+fileUpload);
 
     }
 
