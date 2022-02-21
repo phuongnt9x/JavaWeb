@@ -5,9 +5,9 @@ import java.util.Date;
 
 @Entity
 @Table
-public class FeedBack implements Cloneable {
+public class FeedBack{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private int star;
     private String author;
@@ -18,21 +18,16 @@ public class FeedBack implements Cloneable {
     public FeedBack() {
     }
 
-    public FeedBack(int star, String author, String feedback, Date time) {
+    public FeedBack(int star, String author, String feedback) {
 
         this.star = star;
         this.author = author;
         this.feedback = feedback;
-        this.time = time;
-        ;
+        this.time=new Date();
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getStar() {

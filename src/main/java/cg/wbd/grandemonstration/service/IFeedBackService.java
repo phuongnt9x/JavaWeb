@@ -4,7 +4,7 @@ import cg.wbd.grandemonstration.model.FeedBack;
 
 import java.util.List;
 
-public interface FeedBackService {
+public interface IFeedBackService {
     List<FeedBack> findAll();
 
     void addFeedBack(FeedBack feedback);
