@@ -16,7 +16,7 @@ import com.app.service.IUserService;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-    private IUserService iUserService;
+    private IUserService userService;
     @GetMapping("")
     public ModelAndView showFormCreate(){
         return new ModelAndView("create","user",new User());
@@ -27,7 +27,9 @@ public class UserController {
             return new ModelAndView("create","user",user);
 
         }   else {
-            return new ModelAndView("create","user",new User());
+            ModelAndView modelAndView=new ModelAndView("result","user",user);
+            userService.save(user);
+            return modelAndView;
         }
     }
 }
