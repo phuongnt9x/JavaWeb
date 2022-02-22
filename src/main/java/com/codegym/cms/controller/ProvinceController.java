@@ -24,7 +24,7 @@ public class ProvinceController {
     private ICustomerService customerService;
 
     @GetMapping("/provinces")
-    public ModelAndView listProvinces() {
+    public ModelAndView listProvinces() throws Exception {
         Iterable<Province> provinces = provinceService.findAll();
         ModelAndView modelAndView = new ModelAndView("/province/list");
         modelAndView.addObject("provinces", provinces);

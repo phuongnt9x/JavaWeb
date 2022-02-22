@@ -23,7 +23,7 @@ public class CustomerController {
     private IProvinceService provinceService;
 
     @ModelAttribute("provinces")
-    public Iterable<Province> provinces(){
+    public Iterable<Province> provinces() throws Exception {
         return provinceService.findAll();
     }
 
@@ -45,7 +45,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers")
-    public ModelAndView listCustomers(@RequestParam("search") Optional<String> search, Pageable pageable){
+    public ModelAndView listCustomers(@RequestParam("search") Optional<String> search, Pageable pageable) throws Exception {
         Page<Customer> customers;
         if(search.isPresent()){
             customers = customerService.findAllByFirstNameContaining(search.get(), pageable);
@@ -56,7 +56,7 @@ public class CustomerController {
         modelAndView.addObject("customers", customers);
         return modelAndView;
     }
-
+/*
     @GetMapping("/edit-customer/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
         Optional<Customer> customer = customerService.findById(id);
@@ -68,6 +68,17 @@ public class CustomerController {
             ModelAndView modelAndView = new ModelAndView("/error.404");
             return modelAndView;
         }
+    }*/
+    @GetMapping("/edit-customer/{id}")
+    public ModelAndView showInformation(@PathVariable Long id) {
+        try {
+            ModelAndView modelAndView = new ModelAndView("/customer/edit");
+            Optional<Customer> customerOptional = customerService.findOne(id);
+            modelAndView.addObject("customer", customerOptional.get());
+            return modelAndView;
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/customers");
+        }
     }
 
     @PostMapping("/edit-customer")
@@ -78,6 +89,7 @@ public class CustomerController {
         modelAndView.addObject("message", "Customer updated successfully");
         return modelAndView;
     }
+
 
     @GetMapping("/delete-customer/{id}")
     public ModelAndView showDeleteForm(@PathVariable Long id) {
@@ -92,6 +104,7 @@ public class CustomerController {
             return modelAndView;
         }
     }
+
 
     @PostMapping("/delete-customer")
     public String deleteCustomer(@ModelAttribute("customer") Customer customer) {
