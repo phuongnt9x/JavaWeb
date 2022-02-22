@@ -24,7 +24,6 @@ dependencies {
     implementation group: 'org.springframework', name: 'spring-orm', version: '4.3.17.RELEASE'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
     implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.6.1'
-    implementation group: 'org.springframework', name: 'spring-aspects', version: '5.3.2'
 }
 
 test {
