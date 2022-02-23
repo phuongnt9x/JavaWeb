@@ -5,16 +5,37 @@
     <title>List Blog</title>
 </head>
 <body>
-<a href="/create-blog">Create new blog</a>
-<table th:each="blog:${blogs}" border="1">
+<a href="/create-post">Create new post</a>
+<a href="/category">List category</a>
+<form>
+    Search by title:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<table border="1">
     <tr>
-        <td>Title: </td>
-        <td th:text="${blog.title}"></td>
-        <td><a th:href="@{/detail-blog/__${blog.id}__}">View</a>
-        <td><a th:href="@{/edit-blog/__${blog.id}__ }">Edit</a></td>
-        <td><a th:href="@{/delete-blog/__${blog.id}__ }">Delete</a></td>
+        <th>Title name</th>
+        <th>Category</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
-
+    <th:block th:each="p : ${posts}">
+        <tr>
+            <td th:text="${p.title}"></td>
+            <td th:if="${p.category}" th:text="${p.category.name}"></td>
+            <td th:unless="${p.category}"></td>
+            <td><a th:href="@{/detail-post/__${p.id}__ }">View</a></td>
+            <td><a th:href="@{/edit-post/__${p.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-post/__${p.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
 </table>
+
+<div>
+    <a th:href="@{'/'(page=${posts.number - 1})}" th:if="${posts.hasPrevious()}">Previous</a>
+    <span th:text="${posts.number + 1}"></span>/<span th:text="${posts.totalPages}"></span>
+    <a th:href="@{'/'(page=${posts.number + 1})}" th:if="${posts.hasNext()}">Next</a>
+</div>
 </body>
 </html>

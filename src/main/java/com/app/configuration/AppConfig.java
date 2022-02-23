@@ -1,9 +1,9 @@
 package com.app.configuration;
 
-import com.app.repository.BlogRepository;
-import com.app.repository.IBlogRepository;
-import com.app.service.BlogService;
-import com.app.service.IBlogService;
+import com.app.formater.CategoryFormatter;
+import com.app.service.CategoryService;
+import com.app.service.PostService;
+import com.app.service.IPostService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -31,10 +34,11 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.app.controller")
+@ComponentScan("com.app")
 @EnableWebMvc
 @EnableTransactionManagement
-
+@EnableJpaRepositories("com.app.repository")
+@EnableSpringDataWebSupport
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -113,13 +117,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return properties;
     }
 
-    @Bean
-    public IBlogRepository blogRepository() {
-        return new BlogRepository();
-    }
 
-    @Bean
-    public IBlogService blogService() {
-        return new BlogService();
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryService.class)));
     }
 }

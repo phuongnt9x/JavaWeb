@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table()
-public class Blog {
+public class Post {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -14,18 +14,19 @@ public class Blog {
     @Lob
     private String content;
     private Date date;
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public Blog() {}
+    public Post() {}
 
     public Long getId() {
         return id;
     }
 
-    public Blog(String title, String content, String category) {
+    public Post(String title, String content) {
         this.title = title;
         this.content = content;
-        this.category = category;
     }
 
     public void setId(Long id) {
@@ -56,11 +57,11 @@ public class Blog {
         this.date = date;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }

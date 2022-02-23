@@ -2,28 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Delete customer</title>
+  <title>Delete post</title>
 </head>
 <body>
-<h1>Delete customer</h1>
+<h1>Delete post</h1>
 <h2>Are you sure?</h2>
 <p>
-  <a href="/">Blog list</a>
+  <a href="/">Post list</a>
 </p>
-<form th:action="@{/delete-blog}" th:object="${blog}" method="post">
+<form th:action="@{/delete-post}" th:object="${post}" method="post">
   <input th:type="hidden" name="id" th:field="*{id}">
   <table>
     <tr>
       <td>Title</td>
-      <td th:text="${blog.title}"></td>
+      <td th:text="${post.title}"></td>
     </tr>
     <tr>
       <td>Content:</td>
-      <td th:text="${blog.content}"></td>
+      <td th:text="${post.content}"></td>
     </tr>
     <tr>
       <td></td>
-      <td><input type="submit" value="Delete blog"></td>
+      <td><input type="submit" value="Delete post"></td>
     </tr>
   </table>
 </form>

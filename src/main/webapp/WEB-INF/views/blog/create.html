@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-<h1>blogs</h1>
-<a href="/">Back to list blogs</a>
-<form action="/create-blog" method="post" th:object="${blog}">
+<h1>posts</h1>
+<a href="/">Back to list posts</a>
+<form action="/create-post" method="post" th:object="${post}">
     <table border="1">
         <tr>
             <th>Title name</th>
@@ -15,10 +15,12 @@
         </tr>
 
         <tr>
-            <th>Category name</th>
-            <td><input type="text" th:field="*{category}"></td>
-
-
+            <td>Categories:</td>
+            <td>
+                <select th:field="*{category}">
+                    <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <th>Content</th>
