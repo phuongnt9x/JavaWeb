@@ -86,7 +86,7 @@ public class BlogController {
     public ModelAndView showDetailBlog(@PathVariable Long id) {
         Blog blog = blogService.findById(id);
         if (blog != null) {
-            ModelAndView modelAndView = new ModelAndView("/blog/view");
+            ModelAndView modelAndView = new ModelAndView("/blog/list");
             modelAndView.addObject("blog", blog);
             return modelAndView;
 
