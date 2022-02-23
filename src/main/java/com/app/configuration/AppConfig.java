@@ -1,9 +1,9 @@
 package com.app.configuration;
 
-import com.app.repository.CustomerRepository;
-import com.app.repository.ICustomerRepository;
-import com.app.service.CustomerService;
-import com.app.service.ICustomerService;
+import com.app.repository.BlogRepository;
+import com.app.repository.IBlogRepository;
+import com.app.service.BlogService;
+import com.app.service.IBlogService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -82,7 +82,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.nal.model");
+        em.setPackagesToScan("com.app.model");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(additionalProperties());
@@ -93,9 +93,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/demo");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/blog_app");
+        dataSource.setUsername("phuong");
+        dataSource.setPassword("qwe123456!@#");
         return dataSource;
     }
 
@@ -114,12 +114,12 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     @Bean
-    public ICustomerRepository customerRepository() {
-        return new CustomerRepository();
+    public IBlogRepository blogRepository() {
+        return new BlogRepository();
     }
 
     @Bean
-    public ICustomerService customerService() {
-        return new CustomerService();
+    public IBlogService blogService() {
+        return new BlogService();
     }
 }

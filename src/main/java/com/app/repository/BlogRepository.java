@@ -1,7 +1,7 @@
 package com.app.repository;
 
 
-import com.app.model.Customer;
+import com.app.model.Blog;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -11,19 +11,19 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public class CustomerRepository implements ICustomerRepository {
+public class BlogRepository implements IBlogRepository {
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public List<Customer> findAll() {
-        TypedQuery<Customer> query = em.createQuery("select c from Customer c", Customer.class);
+    public List<Blog> findAll() {
+        TypedQuery<Blog> query = em.createQuery("select c from Blog c", Blog.class);
         return query.getResultList();
     }
 
     @Override
-    public Customer findById(Long id) {
-        TypedQuery<Customer> query = em.createQuery("select c from Customer c where  c.id=:id", Customer.class);
+    public Blog findById(Long id) {
+        TypedQuery<Blog> query = em.createQuery("select c from Blog c where  c.id=:id", Blog.class);
         query.setParameter("id", id);
         try {
             return query.getSingleResult();
@@ -33,19 +33,19 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
-    public void save(Customer customer) {
-        if (customer.getId() != null) {
-            em.merge(customer);
+    public void save(Blog blog) {
+        if (blog.getId() != null) {
+            em.merge(blog);
         } else {
-            em.persist(customer);
+            em.persist(blog);
         }
     }
 
     @Override
     public void remove(Long id) {
-        Customer customer = findById(id);
-        if (customer != null) {
-            em.remove(customer);
+        Blog blog = findById(id);
+        if (blog != null) {
+            em.remove(blog);
         }
     }
 }

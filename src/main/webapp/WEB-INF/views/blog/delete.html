@@ -8,22 +8,22 @@
 <h1>Delete customer</h1>
 <h2>Are you sure?</h2>
 <p>
-  <a href="/customers">Customer list</a>
+  <a href="/">Blog list</a>
 </p>
-<form th:action="@{/delete-customer}" th:object="${customer}" method="post">
+<form th:action="@{/delete-blog}" th:object="${blog}" method="post">
   <input th:type="hidden" name="id" th:field="*{id}">
   <table>
     <tr>
-      <td>First name:</td>
-      <td th:text="${customer.firstName}"></td>
+      <td>Title</td>
+      <td th:text="${blog.title}"></td>
     </tr>
     <tr>
-      <td>Last name:</td>
-      <td th:text="${customer.lastName}"></td>
+      <td>Content:</td>
+      <td th:text="${blog.content}"></td>
     </tr>
     <tr>
       <td></td>
-      <td><input type="submit" value="Delete customer"></td>
+      <td><input type="submit" value="Delete blog"></td>
     </tr>
   </table>
 </form>
