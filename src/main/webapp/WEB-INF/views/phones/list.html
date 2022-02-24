@@ -46,6 +46,7 @@
                         '        <td>Producer</td>\n' +
                         '        <td>Model</td>\n' +
                         '        <td>Price</td>\n' +
+                        '        <td>Update</td>\n' +
                         '        <td>Delete</td>\n' +
                         '    </tr>';
                     for (let i = 0; i < data.length; i++) {
@@ -58,6 +59,7 @@
 
         function getSmartphone(smartphone) {
             return `<tr><td >${smartphone.producer}</td><td >${smartphone.model}</td><td >${smartphone.price}</td>` +
+                `<td><a class="updateSmartphone" href="smartphones/update/${smartphone.id}">Update</a></td>` +
                 `<td><a class="deleteSmartphone" href="${smartphone.id}">Delete</a></td></tr>`;
         }
 
@@ -111,6 +113,8 @@
         <td>Producer</td>
         <td>Model</td>
         <td>Price</td>
+        <td>Update</td>
+
         <td>Delete</td>
     </tr>
     <th:block th:each="smartphone: ${smartphones}">
@@ -118,6 +122,8 @@
             <td th:text="${smartphone.producer}"></td>
             <td th:text="${smartphone.model}"></td>
             <td th:text="${smartphone.price}"></td>
+            <td><a th:href="@{/smartphones/update/__${smartphone.getId()}__}">Update</a></td>
+
             <td><a class="deleteSmartphone" th:href="${smartphone.getId()}">Delete</a></td>
         </tr>
     </th:block>

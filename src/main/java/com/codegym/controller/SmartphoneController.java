@@ -42,4 +42,15 @@ public class SmartphoneController {
         smartphoneService.remove(id);
         return new ResponseEntity<>(smartphoneOptional.get(), HttpStatus.NO_CONTENT);
     }
+    @GetMapping("/update/{id}")
+    public ModelAndView showEditForm(@PathVariable Long id) {
+        Optional<Smartphone> smartphone = smartphoneService.findById(id);
+       ModelAndView modelAndView=new ModelAndView("/phones/edit");
+       modelAndView.addObject("smartphone",smartphone.get());
+        return modelAndView;
+    }
+    @PutMapping("/update")
+    public ResponseEntity<Smartphone> updateSmartphone(@RequestBody Smartphone smartphone) {
+        return new ResponseEntity<>(smartphoneService.save(smartphone), HttpStatus.OK);
+    }
 }
