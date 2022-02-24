@@ -10,7 +10,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(targetEntity = Post.class)
+    @OneToMany(targetEntity = Post.class,fetch = FetchType.EAGER)
     private List<Post> posts;
 
     public Category() {

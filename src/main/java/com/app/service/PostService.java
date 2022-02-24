@@ -51,5 +51,10 @@ public class PostService implements IPostService {
         return postRepository.findAllByCategory_NameContaining(categoryName,pageable);
     }
 
+    @Override
+    public Iterable<Post> findAllByCategory_NameContaining(String categoryName) {
+        return postRepository.findAllByCategory_NameContaining(categoryName);
+    }
+
 
 }

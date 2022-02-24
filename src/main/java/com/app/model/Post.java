@@ -1,8 +1,12 @@
 package com.app.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.Date;
-
+@ToString(exclude = "category")
+@EqualsAndHashCode(exclude = "category")
 @Entity
 @Table()
 public class Post {
@@ -14,7 +18,7 @@ public class Post {
     @Lob
     private String content;
     private Date date;
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 
