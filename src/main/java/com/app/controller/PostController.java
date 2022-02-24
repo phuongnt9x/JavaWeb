@@ -115,6 +115,13 @@ public class PostController {
         postService.remove(post.getId());
         return "redirect:/";
     }
-
+    @GetMapping("/post/category/{categoryName}")
+    public ModelAndView showPostByCategory(@PathVariable String categoryName,Pageable pageable)
+    {
+        Page<Post> posts=postService.findAllByCategory_NameContaining(categoryName,pageable);
+        ModelAndView modelAndView=new ModelAndView("/blog/list");
+        modelAndView.addObject("posts",posts);
+        return modelAndView;
+    }
 
 }

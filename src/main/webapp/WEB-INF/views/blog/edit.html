@@ -22,13 +22,17 @@
         <tr>
             <td>Category:</td>
             <td>
-                <select name="province">
+                <select th:field="*{category}">
                     <option th:each="p : ${categories}"
                             th:value="${p.id}"
                             th:text="${p.name}"
                             th:selected="(${post.category}) and (${p.id} == *{category.id})"></option>
                 </select>
             </td>
+        </tr>
+        <tr>
+            <th>Date Create</th>
+            <td><input type="text" th:field="*{date}" disabled></td>
         </tr>
         <tr>
             <th>Content</th>

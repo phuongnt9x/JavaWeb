@@ -9,12 +9,14 @@
 <table  border="1">
     <tr>
         <th>Name</th>
+        <th>View list posts</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     <th:block th:each="category:${categories}">
     <tr>
         <td th:text="${category.name}"></td>
+        <td><a th:href="@{/post/category/__${category.name}__ }">View</a></td>
         <td><a th:href="@{/category/edit/__${category.id}__ }">Edit</a></td>
         <td><a th:href="@{/category/delete/__${category.id}__ }">Delete</a></td>
     </tr>

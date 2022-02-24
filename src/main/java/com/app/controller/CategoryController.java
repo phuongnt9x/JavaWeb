@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import com.app.model.Category;
+import com.app.repository.IPostRepository;
 import com.app.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

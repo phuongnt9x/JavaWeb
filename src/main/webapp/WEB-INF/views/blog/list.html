@@ -5,7 +5,7 @@
     <title>List Blog</title>
 </head>
 <body>
-<a href="/create-post">Create new post</a>
+<a href="/create-post">Create new post</a> ||
 <a href="/category">List category</a>
 <form>
     Search by title:
@@ -16,6 +16,7 @@
     <tr>
         <th>Title name</th>
         <th>Category</th>
+        <th>Date Create</th>
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -25,6 +26,7 @@
             <td th:text="${p.title}"></td>
             <td th:if="${p.category}" th:text="${p.category.name}"></td>
             <td th:unless="${p.category}"></td>
+            <td th:text="${p.date}"></td>
             <td><a th:href="@{/detail-post/__${p.id}__ }">View</a></td>
             <td><a th:href="@{/edit-post/__${p.id}__ }">Edit</a></td>
             <td><a th:href="@{/delete-post/__${p.id}__ }">Delete</a></td>

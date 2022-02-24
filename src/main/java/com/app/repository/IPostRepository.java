@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IPostRepository extends PagingAndSortingRepository<Post,Long> {
     Page<Post> findAllByTitleContaining(String title, Pageable pageable);
+    Page<Post> findAllByCategory_NameContaining(String categoryName,Pageable pageable);
 }

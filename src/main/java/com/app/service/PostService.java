@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.app.model.Category;
 import com.app.model.Post;
 import com.app.repository.IPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,11 @@ public class PostService implements IPostService {
     public Page<Post> findAllByTitleContaining(String title, Pageable pageable) {
         return postRepository.findAllByTitleContaining(title, pageable);
     }
+
+    @Override
+    public Page<Post> findAllByCategory_NameContaining(String categoryName, Pageable pageable) {
+        return postRepository.findAllByCategory_NameContaining(categoryName,pageable);
+    }
+
+
 }
