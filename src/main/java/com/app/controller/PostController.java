@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 import java.util.Optional;
 
+@RequestMapping("/post")
 @Controller
 public class PostController {
 
