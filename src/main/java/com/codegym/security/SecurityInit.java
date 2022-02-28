@@ -4,4 +4,3 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 
 public class SecurityInit extends AbstractSecurityWebApplicationInitializer {
 }
-
