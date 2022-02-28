@@ -1,9 +1,8 @@
-package com.codegym.security;
+package com.app.security;
 
-import com.codegym.rest.CustomAccessDeniedHandler;
-import com.codegym.rest.JwtAuthenticationTokenFilter;
-import com.codegym.rest.RestAuthenticationEntryPoint;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.app.rest.CustomAccessDeniedHandler;
+import com.app.rest.JwtAuthenticationTokenFilter;
+import com.app.rest.RestAuthenticationEntryPoint;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -19,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan("com.codegym")
+@ComponentScan("com.app")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean

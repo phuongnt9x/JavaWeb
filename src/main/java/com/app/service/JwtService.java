@@ -1,4 +1,4 @@
-package com.codegym.service;
+package com.app.service;
 
 import java.util.Date;
 import org.springframework.stereotype.Service;

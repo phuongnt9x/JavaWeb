@@ -1,6 +1,6 @@
-package com.codegym.configuration;
+package com.app.configuration;
 
-import com.codegym.security.SecurityConfig;
+import com.app.security.SecurityConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {

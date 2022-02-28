@@ -1,4 +1,4 @@
-package com.codegym.rest;
+package com.app.rest;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -7,7 +7,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,8 +14,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import com.codegym.service.JwtService;
-import com.codegym.service.UserService;
+import com.app.service.JwtService;
+import com.app.service.UserService;
 
 public class JwtAuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
     private final static String TOKEN_HEADER = "authorization";
@@ -38,7 +37,7 @@ public class JwtAuthenticationTokenFilter extends UsernamePasswordAuthentication
         String authToken = httpRequest.getHeader(TOKEN_HEADER);
         if (jwtService.validateTokenLogin(authToken)) {
             String username = jwtService.getUsernameFromToken(authToken);
-            com.codegym.entities.User user = userService.loadUserByUsername(username);
+            com.app.entities.User user = userService.loadUserByUsername(username);
             if (user != null) {
                 boolean enabled = true;
                 boolean accountNonExpired = true;

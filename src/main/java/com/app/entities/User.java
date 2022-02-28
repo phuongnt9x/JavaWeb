@@ -1,4 +1,4 @@
-package com.codegym.entities;
+package com.app.entities;
 
 import java.util.ArrayList;
 import java.util.List;

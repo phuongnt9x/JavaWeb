@@ -1,4 +1,4 @@
-package com.codegym.configuration;
+package com.app.configuration;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -11,14 +11,13 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan("com.codegym")
+@ComponentScan("com.app")
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;

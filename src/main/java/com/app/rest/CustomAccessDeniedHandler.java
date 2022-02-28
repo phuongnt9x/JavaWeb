@@ -1,4 +1,4 @@
-package com.codegym.rest;
+package com.app.rest;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

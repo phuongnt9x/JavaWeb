@@ -1,10 +1,10 @@
-package com.codegym.service;
+package com.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import com.codegym.entities.User;
+import com.app.entities.User;
 
 @Service
 public class UserService {
