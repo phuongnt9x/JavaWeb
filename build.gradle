@@ -8,7 +8,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -23,9 +23,26 @@ dependencies {
     implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.5.Final'
     implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.15'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.25'
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.6.1'
+    implementation group: 'org.junit.platform', name: 'junit-platform-commons', version: '1.8.2'
+    testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.8.2'
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.15'
+    testImplementation group: 'com.github.sbrannen', name: 'spring-test-junit5', version: '1.2.0'
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.210'
 }
 
 test {
     useJUnitPlatform()
+
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED", "STANDARD_OUT", "STANDARD_ERROR"
+    }
+    afterTest { desc, result ->
+        println "Testing ${desc.name} [${desc.className}]: ${result.resultType}"
+    }
+    reports {
+        html.enabled = true
+    }
 }
