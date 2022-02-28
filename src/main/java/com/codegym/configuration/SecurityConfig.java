@@ -1,12 +1,12 @@
-package com.codegym.security;
+package com.codegym.configuration;
 
-import com.codegym.rest.CustomAccessDeniedHandler;
-import com.codegym.rest.JwtAuthenticationTokenFilter;
-import com.codegym.rest.RestAuthenticationEntryPoint;
+import com.codegym.model.Role;
+import com.codegym.model.User;
+import com.codegym.service.role.IRoleService;
+import com.codegym.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,17 +14,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.context.annotation.Bean;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan("com.codegym")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    private IUserService userService;
 
     @Bean
-    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
-        return new JwtAuthenticationTokenFilter();
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter();
+    }
+
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
     }
 
     @Bean
@@ -37,18 +45,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomAccessDeniedHandler();
     }
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("kai").password("{noop}12345").roles("ADMIN")
-                .and()
-                .withUser("sena").password("{noop}12345").roles("USER");
+    @Autowired
+    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -56,18 +60,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.httpBasic().authenticationEntryPoint(restServicesEntryPoint());
         http.authorizeRequests()
-                .antMatchers("/", "/rest/login").permitAll()
-                .antMatchers(HttpMethod.GET,"/rest/**").hasAnyRole("USER","ADMIN")
-                .antMatchers(HttpMethod.POST,"/rest/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE,"/rest/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET,"/admin/**").hasRole("ADMIN")
+                .antMatchers("/", "/api/login").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable();
-        http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors();
     }
-
 }
