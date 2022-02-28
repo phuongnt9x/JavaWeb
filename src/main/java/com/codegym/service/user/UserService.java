@@ -1,5 +1,6 @@
 package com.codegym.service.user;
 
+import com.codegym.model.Role;
 import com.codegym.model.User;
 import com.codegym.model.UserPrinciple;
 import com.codegym.repository.IUserRepository;
@@ -9,10 +10,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService implements IUserService {
+    static {
+        Set<Role> roleSet=new HashSet<>();
+        roleSet.add(new Role(1L,"ROLE_ADMIN"));
+
+        User userKai = new User("admin", "123456","kail",roleSet);
+    }
     @Autowired
     private IUserRepository userRepository;
     @Autowired
